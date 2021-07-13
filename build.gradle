@@ -1,0 +1,36 @@
+plugins {
+    id 'java-library'
+}
+
+compileJava.options.encoding = "UTF-8"
+compileJava.sourceCompatibility = "1.8"
+compileJava.sourceCompatibility = "1.8"
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    jcenter()
+	maven {
+	   url "https://hub.spigotmc.org/nexus/content/repositories/snapshots"
+	}
+	maven {
+        url 'https://jitpack.io'
+    }
+	maven {
+		url "https://repo.codemc.io/repository/maven-public/"
+	}
+}
+
+dependencies {
+    api 'org.apache.commons:commons-math3:3.6.1'
+
+    implementation 'com.google.guava:guava:28.0-jre'
+
+    testImplementation 'junit:junit:4.12'
+    
+    compileOnly "org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT"
+
+    compileOnly "com.github.MilkBowl:VaultAPI:1.7"
+}

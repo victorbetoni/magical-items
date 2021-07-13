@@ -1,0 +1,4 @@
+name: MagicalItems
+main: net.threader.magicalitems.MalgicalItems
+version: 1.0
+api-version: 1.16
