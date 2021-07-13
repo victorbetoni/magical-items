@@ -11,11 +11,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.Optional;
 
 public class MagicalItemsLoader {
-    public static MagicalItem load(String id) throws IOException {
+    public static Optional<MagicalItem> load(String id) throws IOException {
         JSONParser parser = new JSONParser();
-        JSONObject object;
+        JSONObject object = null;
         InputStream fileStream = MagicalItemsLoader.class.getResourceAsStream("/items/" + id + ".json")
         if(fileStream == null) {
             throw new IOException("Item's json file not found: " + id + ".json");
@@ -24,7 +25,9 @@ public class MagicalItemsLoader {
             object = (JSONObject) parser.parse(reader);
         } catch (IOException | ParseException ex) {
             ex.printStackTrace();
+            return Optional.empty();
         }
-        return null;
+
+        return Optional.empty();
     }
 }
