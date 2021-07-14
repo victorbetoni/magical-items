@@ -1,18 +1,20 @@
 package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.action.Action;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class ActionTemplate<T> {
     private String id;
-    private Action<T> action;
+    private Action action;
 
-    public ActionTemplate(String id, Action<T> action) {
+    public ActionTemplate(String id, Action action) {
         this.id = id;
         this.action = action;
     }
 
-    public Action<T> getAction() {
-        return action;
+    public void apply(Player holder, ItemStack stack, Object param, Object[] args) {
+        action.trigger(holder, stack, param, args);
     }
 
     public String getIdentifier() {

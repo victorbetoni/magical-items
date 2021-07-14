@@ -15,7 +15,7 @@ public class BasicTemplates {
     public static final Function<Object[], ActionTemplate<LivingEntity>> APPLY_EFFECTS = (args) -> REGISTER.register(
                     new ArgumentativeActionTemplate<LivingEntity>("apply_effects", (p, i, e, a) -> {
                         for (Object o : a) {
-                            e.addPotionEffect((PotionEffect) o);
+                            ((LivingEntity)e).addPotionEffect((PotionEffect) o);
                         }
                     }, args));
 }
