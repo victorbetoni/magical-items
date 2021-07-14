@@ -2,9 +2,12 @@ package net.threader.magicalitems.loader;
 
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import net.threader.magicalitems.MagicalItem;
+import net.threader.magicalitems.cast.JSONCasters;
+import net.threader.magicalitems.util.Tuple;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
@@ -53,6 +56,14 @@ public class MagicalItemsLoader {
         NBTTagCompound compound = craftStack.getTag();
         compound.setString("magical_item_id", id);
         craftStack.save(compound);
+
+        if(object.containsKey("enchantments")) {
+            ((JSONArray) object.get("enchantments"))
+                    .forEach(x -> {
+                        Tuple<Enchantment, Integer> tuple = JSONCasters.JSON_TO_ENCHANTMENT.apply((JSONObject) x);
+                        stack.addUnsafeEnchantment(tuple.getFirst(), tuple.getSecond());
+                    });
+        }
 
         return Optional.empty();
     }
