@@ -25,10 +25,13 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class MagicalItemsLoader {
+    @SuppressWarnings("all")
     public static Optional<MagicalItem> load(String id) throws IOException {
         JSONParser parser = new JSONParser();
         JSONObject object = null;
+
         InputStream fileStream = MagicalItemsLoader.class.getResourceAsStream("/items/" + id + ".json");
+
         if(fileStream == null) {
             throw new IOException("Item's json file not found: " + id + ".json");
         }
@@ -38,6 +41,7 @@ public class MagicalItemsLoader {
             ex.printStackTrace();
             return Optional.empty();
         }
+
         ItemStack stack = new ItemStack((Objects.requireNonNull(Material.matchMaterial((String) object.get("material")))));
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(ChatColor.stripColor((String) object.get("name")));
