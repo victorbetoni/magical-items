@@ -3,6 +3,7 @@ package net.threader.magicalitems.loader;
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import net.threader.magicalitems.MagicalItem;
 import net.threader.magicalitems.cast.JSONCasters;
+import net.threader.magicalitems.util.NBTUtils;
 import net.threader.magicalitems.util.Tuple;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -46,16 +47,14 @@ public class MagicalItemsLoader {
         }
 
         ItemStack stack = new ItemStack((Objects.requireNonNull(Material.matchMaterial((String) object.get("material")))));
+
+        NBTUtils.injectIdentifier(stack, id);
+
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(ChatColor.stripColor((String) object.get("name")));
         JSONArray loreArray = (JSONArray) object.get("lore");
         List<String> lore = new ArrayList<>();
         loreArray.forEach(x -> lore.add(ChatColor.stripColor((String) x)));
-
-        net.minecraft.server.v1_16_R3.ItemStack craftStack = CraftItemStack.asNMSCopy(stack);
-        NBTTagCompound compound = craftStack.getTag();
-        compound.setString("magical_item_id", id);
-        craftStack.save(compound);
 
         if(object.containsKey("enchantments")) {
             ((JSONArray) object.get("enchantments"))
