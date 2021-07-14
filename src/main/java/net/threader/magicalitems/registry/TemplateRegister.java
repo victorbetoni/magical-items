@@ -8,14 +8,14 @@ import java.util.Map;
 import java.util.Optional;
 
 public class TemplateRegister {
-    private Map<String, ActionTemplate> templates = new HashMap<>();
+    private Map<String, ActionTemplate<?>> templates = new HashMap<>();
 
-    public <T extends ActionTemplate> ActionTemplate register(T template) {
+    public <T extends ActionTemplate<?>> T register(T template) {
         templates.put(template.getIdentifier(), template);
         return template;
     }
 
-    public <T extends ActionTemplate> Optional<T> find(String id) {
+    public <T extends ActionTemplate<?>> Optional<T> find(String id) {
         return Optional.ofNullable((T) templates.get(id));
     }
  }

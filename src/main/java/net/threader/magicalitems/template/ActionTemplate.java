@@ -2,14 +2,18 @@ package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.action.Action;
 
-public abstract class ActionTemplate {
+public class ActionTemplate<T> {
     private String id;
+    private Action<T> action;
 
-    public ActionTemplate(String id) {
+    public ActionTemplate(String id, Action<T> action) {
         this.id = id;
+        this.action = action;
     }
 
-    public abstract Action<?> getAction();
+    public Action<T> getAction() {
+        return action;
+    }
 
     public String getIdentifier() {
         return id;
