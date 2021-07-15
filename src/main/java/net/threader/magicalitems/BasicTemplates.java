@@ -12,10 +12,10 @@ public class BasicTemplates {
 
     public static final TemplateRegister REGISTER = new TemplateRegister();
 
-    public static final Function<Object[], ArgumentativeActionTemplate<LivingEntity>> APPLY_EFFECTS = (args) -> REGISTER.register(
-                    new ArgumentativeActionTemplate<LivingEntity>("apply_effects", (p, i, e, a) -> {
-                        for (Object o : a) {
-                            ((LivingEntity)e).addPotionEffect((PotionEffect) o);
-                        }
-                    }, args));
+    public static final Function<Object[], ArgumentativeActionTemplate<LivingEntity>> APPLY_EFFECTS = (args) ->
+            REGISTER.register(new ArgumentativeActionTemplate<>("apply_effects", LivingEntity.class, (p, i, e, a) -> {
+                for (Object o : a) {
+                    ((LivingEntity) e).addPotionEffect((PotionEffect) o);
+                }
+            }, args));
 }

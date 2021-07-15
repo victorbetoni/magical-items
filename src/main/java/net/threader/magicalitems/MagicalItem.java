@@ -1,6 +1,7 @@
 package net.threader.magicalitems;
 
 import net.threader.magicalitems.action.Action;
+import net.threader.magicalitems.template.ActionTemplate;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -8,15 +9,15 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 
 public class MagicalItem {
-    private Set<Action<?>> actions;
+    private Set<ActionTemplate<?>> actions;
     private ItemStack itemStack;
 
-    public MagicalItem(Set<Action<?>> actions, ItemStack itemStack) {
+    public MagicalItem(Set<ActionTemplate<?>> actions, ItemStack itemStack) {
         this.actions = actions;
         this.itemStack = itemStack;
     }
 
-    public Set<Action<?>> getActions() {
+    public Set<ActionTemplate<?>> getActions() {
         return actions;
     }
 
@@ -24,9 +25,9 @@ public class MagicalItem {
         return itemStack;
     }
 
-    public <T> void applyActions(Player player1, ItemStack stack, Object obj, Object[] args) {
+    public void applyActions(Player player1, ItemStack stack, Object obj) {
         actions.stream()
                 .filter(action -> obj.getClass().isInstance(action.getTargetClass()))
-                .forEach(action -> action.trigger(player1, stack, obj, args));
+                .forEach(action -> action.apply(player1, stack, obj));
     }
 }
