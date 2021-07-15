@@ -2,6 +2,7 @@ package net.threader.magicalitems.loader;
 
 import net.minecraft.server.v1_16_R3.NBTTagCompound;
 import net.threader.magicalitems.MagicalItem;
+import net.threader.magicalitems.MagicalItems;
 import net.threader.magicalitems.cast.JSONCasters;
 import net.threader.magicalitems.util.NBTUtils;
 import net.threader.magicalitems.util.Tuple;
@@ -17,6 +18,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,12 +32,15 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class MagicalItemsLoader {
+
+    private static final File ITEMS_DIR = new File(MagicalItems.instance().getDataFolder(), "items");
+
     @SuppressWarnings("all")
     public static Optional<MagicalItem> load(String id) throws IOException {
         JSONParser parser = new JSONParser();
         JSONObject object = null;
 
-        InputStream fileStream = MagicalItemsLoader.class.getResourceAsStream("/items/" + id + ".json");
+        InputStream fileStream = new FileInputStream(new File(ITEMS_DIR, id));
 
         if(fileStream == null) {
             throw new IOException("Item's json file not found: " + id + ".json");
