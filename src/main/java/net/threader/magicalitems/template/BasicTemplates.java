@@ -1,7 +1,6 @@
 package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.registry.Registry;
-import net.threader.magicalitems.util.Tuple;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 
@@ -17,5 +16,5 @@ public class BasicTemplates {
                         for (Object obj : a) {
                             ((LivingEntity) e).addPotionEffect((PotionEffect) obj);
                         }
-            }, args, ActionTargetSpec.LIVING_HIT_TARGET));
+            }, args, ActionTemplateTargetSpec.LIVING_HIT_TARGET));
 }

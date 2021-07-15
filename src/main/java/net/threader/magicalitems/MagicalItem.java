@@ -23,9 +23,4 @@ public class MagicalItem {
         return itemStack;
     }
 
-    public void applyActions(Player player1, ItemStack stack, Object obj) {
-        actions.stream()
-                .filter(action -> obj.getClass().isInstance(action.getTargetClass()))
-                .forEach(action -> action.apply(player1, stack, obj));
-    }
 }
