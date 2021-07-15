@@ -4,6 +4,7 @@ import net.threader.magicalitems.MagicalItem;
 import net.threader.magicalitems.MagicalItems;
 import net.threader.magicalitems.cast.JSONCasters;
 import net.threader.magicalitems.factory.JSONTemplateAdaptors;
+import net.threader.magicalitems.template.ActionTemplate;
 import net.threader.magicalitems.util.NBTUtils;
 import net.threader.magicalitems.util.Tuple;
 import org.bukkit.ChatColor;
@@ -23,9 +24,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 public class MagicalItemsLoader {
 
@@ -58,6 +61,8 @@ public class MagicalItemsLoader {
         List<String> lore = new ArrayList<>();
         loreArray.forEach(x -> lore.add(ChatColor.stripColor((String) x)));
 
+        Set<ActionTemplate<?>> actions = new HashSet<>();
+
         if(object.containsKey("enchantments")) {
             ((JSONArray) object.get("enchantments"))
                     .forEach(x -> {
@@ -68,9 +73,9 @@ public class MagicalItemsLoader {
 
         if(object.containsKey("onHit")) {
             JSONObject templates = (JSONObject) ((JSONObject) object.get("onHit")).get("templates");
-            templates.keySet().forEach(x -> JSONTemplateAdaptors.findAndApply((String) x, templates.get(x)));
+            templates.keySet().forEach(x -> JSONTemplateAdaptors.findAndApply((String) x, templates.get(x)).ifPresent(actions::add));
         }
 
-        return Optional.empty();
+        return Optional.of(new MagicalItem(actions, stack));
     }
 }

@@ -1,6 +1,6 @@
 package net.threader.magicalitems.factory;
 
-import net.threader.magicalitems.BasicTemplates;
+import net.threader.magicalitems.template.BasicTemplates;
 import net.threader.magicalitems.cast.JSONCasters;
 import net.threader.magicalitems.registry.Registry;
 import net.threader.magicalitems.template.ActionTemplate;

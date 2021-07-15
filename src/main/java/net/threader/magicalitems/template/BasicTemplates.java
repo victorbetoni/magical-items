@@ -1,4 +1,4 @@
-package net.threader.magicalitems;
+package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.registry.Registry;
 import net.threader.magicalitems.template.ActionTemplate;
