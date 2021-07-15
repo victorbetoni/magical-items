@@ -39,7 +39,7 @@ public class MagicalItemsLoader {
         JSONParser parser = new JSONParser();
         JSONObject object = null;
 
-        InputStream fileStream = new FileInputStream(new File(ITEMS_DIR, id));
+        InputStream fileStream = new FileInputStream(new File(ITEMS_DIR, id + ".json"));
 
         if(fileStream == null) {
             throw new IOException("Item's json file not found: " + id + ".json");

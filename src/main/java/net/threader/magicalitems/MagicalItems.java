@@ -18,7 +18,7 @@ public class MagicalItems extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-
+        this.saveDefaultConfig();
         Bukkit.getPluginManager().registerEvents(new EntityHitByEntityListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
         Bukkit.getPluginManager().registerEvents(new MagicalListener(), this);
