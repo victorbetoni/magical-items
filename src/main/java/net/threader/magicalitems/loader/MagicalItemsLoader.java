@@ -3,6 +3,7 @@ package net.threader.magicalitems.loader;
 import net.threader.magicalitems.MagicalItem;
 import net.threader.magicalitems.MagicalItems;
 import net.threader.magicalitems.cast.JSONCasters;
+import net.threader.magicalitems.factory.JSONTemplateAdaptors;
 import net.threader.magicalitems.util.NBTUtils;
 import net.threader.magicalitems.util.Tuple;
 import org.bukkit.ChatColor;
@@ -67,7 +68,7 @@ public class MagicalItemsLoader {
 
         if(object.containsKey("onHit")) {
             JSONObject templates = (JSONObject) ((JSONObject) object.get("onHit")).get("templates");
-
+            templates.keySet().forEach(x -> JSONTemplateAdaptors.findAndApply((String) x, templates.get(x)));
         }
 
         return Optional.empty();
