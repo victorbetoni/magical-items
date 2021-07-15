@@ -8,7 +8,7 @@ public class NBTUtils {
     public static boolean isMagical(ItemStack stack) {
         net.minecraft.server.v1_16_R3.ItemStack craftStack = CraftItemStack.asNMSCopy(stack);
         NBTTagCompound compound = craftStack.getTag();
-        return compound.getKeys().contains("magical_item_id");
+        return compound != null && compound.getKeys().contains("magical_item_id");
     }
 
     public static String extractIdentifier(ItemStack stack) {
