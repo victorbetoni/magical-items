@@ -1,6 +1,5 @@
 package net.threader.magicalitems.event;
 
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 

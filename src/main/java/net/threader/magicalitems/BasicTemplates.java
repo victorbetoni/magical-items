@@ -1,7 +1,6 @@
 package net.threader.magicalitems;
 
 import net.threader.magicalitems.registry.Registry;
-import net.threader.magicalitems.registry.TemplateRegister;
 import net.threader.magicalitems.template.ActionTemplate;
 import net.threader.magicalitems.template.ArgumentativeActionTemplate;
 import org.bukkit.entity.LivingEntity;

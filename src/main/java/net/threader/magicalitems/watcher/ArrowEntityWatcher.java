@@ -1,6 +1,5 @@
 package net.threader.magicalitems.watcher;
 
-import org.bukkit.entity.Arrow;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;

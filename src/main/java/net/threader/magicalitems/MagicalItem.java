@@ -1,12 +1,10 @@
 package net.threader.magicalitems;
 
-import net.threader.magicalitems.action.Action;
 import net.threader.magicalitems.template.ActionTemplate;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Set;
-import java.util.function.BiConsumer;
 
 public class MagicalItem {
     private Set<ActionTemplate<?>> actions;
