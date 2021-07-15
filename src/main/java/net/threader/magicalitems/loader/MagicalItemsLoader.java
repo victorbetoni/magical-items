@@ -60,6 +60,8 @@ public class MagicalItemsLoader {
         JSONArray loreArray = (JSONArray) object.get("lore");
         List<String> lore = new ArrayList<>();
         loreArray.forEach(x -> lore.add(ChatColor.stripColor((String) x)));
+        meta.setLore(lore);
+        stack.setItemMeta(meta);
 
         Set<ActionTemplate<?>> actions = new HashSet<>();
 
