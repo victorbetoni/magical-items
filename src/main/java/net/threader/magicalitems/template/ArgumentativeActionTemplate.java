@@ -1,12 +1,19 @@
 package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.action.Action;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class ArgumentativeActionTemplate<T> extends ActionTemplate<T> {
     private Object[] args;
 
     public ArgumentativeActionTemplate(String id, Action action, Object[] args) {
         super(id, action);
+    }
+
+    @Override
+    public void apply(Player holder, ItemStack stack, Object param) {
+        action.trigger(holder, stack, param, args);
     }
 
     public Object[] getArguments() {

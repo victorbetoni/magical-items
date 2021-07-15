@@ -70,6 +70,11 @@ public class MagicalItemsLoader {
                     });
         }
 
+        if(object.containsKey("onHit")) {
+            JSONObject templates = (JSONObject) ((JSONObject) object.get("onHit")).get("templates");
+
+        }
+
         return Optional.empty();
     }
 }
