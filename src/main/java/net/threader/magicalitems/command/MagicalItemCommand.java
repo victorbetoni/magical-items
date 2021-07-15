@@ -19,7 +19,7 @@ public class MagicalItemCommand implements CommandExecutor {
 
         Player player = (Player) commandSender;
 
-        if (player.hasPermission("magicalitem.adm")) {
+        if (!player.hasPermission("magicalitem.adm")) {
             commandSender.sendMessage("§cVocê não tem permissão");
             return true;
         }
