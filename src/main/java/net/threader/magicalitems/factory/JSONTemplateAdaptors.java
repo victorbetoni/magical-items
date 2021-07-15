@@ -2,13 +2,16 @@ package net.threader.magicalitems.factory;
 
 import net.threader.magicalitems.BasicTemplates;
 import net.threader.magicalitems.cast.JSONCasters;
+import net.threader.magicalitems.registry.Registry;
 import net.threader.magicalitems.template.ActionTemplate;
 import org.bukkit.potion.PotionEffect;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class JSONTemplateAdaptors {
-    public static TemplateAdaptor<JSONArray> APPLY_EFFECTS = new TemplateAdaptor<JSONArray>() {
+    public static final Registry<TemplateAdaptor<?>> REGISTRY = new Registry<>();
+
+    public static TemplateAdaptor<JSONArray> APPLY_EFFECTS = REGISTRY.register("apply_effects", new TemplateAdaptor<JSONArray>() {
         @Override
         public String getTargetTemplate() {
             return "apply_effects";
@@ -21,14 +24,13 @@ public class JSONTemplateAdaptors {
                 JSONObject obj = (JSONObject) param.get(i);
                 effects[i] = JSONCasters.JSON_TO_POTION_EFFECT.apply(obj);
             }
-            return BasicTemplates.APPLY_EFFECTS.apply(effects);
+            return BasicTemplates.REGISTRY.find(getTargetTemplate()).get().apply(effects);
         }
 
         @Override
         public Class<JSONArray> getTargetClass() {
             return JSONArray.class;
         }
-    };
+    });
 
-    
 }
