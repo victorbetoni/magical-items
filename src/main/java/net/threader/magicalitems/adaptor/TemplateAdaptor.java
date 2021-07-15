@@ -1,4 +1,4 @@
-package net.threader.magicalitems.factory;
+package net.threader.magicalitems.adaptor;
 
 import net.threader.magicalitems.template.ActionTemplate;
 

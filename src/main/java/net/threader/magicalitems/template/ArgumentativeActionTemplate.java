@@ -7,8 +7,8 @@ import org.bukkit.inventory.ItemStack;
 public class ArgumentativeActionTemplate<T> extends ActionTemplate<T> {
     private Object[] args;
 
-    public ArgumentativeActionTemplate(String id, Class<T> targetClass, Action action, Object[] args) {
-        super(id, targetClass, action);
+    public ArgumentativeActionTemplate(String id, Class<T> targetClass, Action action, Object[] args, ActionTargetSpec spec) {
+        super(id, targetClass, action, spec);
     }
 
     @Override

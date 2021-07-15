@@ -3,7 +3,7 @@ package net.threader.magicalitems.loader;
 import net.threader.magicalitems.MagicalItem;
 import net.threader.magicalitems.MagicalItems;
 import net.threader.magicalitems.cast.JSONCasters;
-import net.threader.magicalitems.factory.JSONTemplateAdaptors;
+import net.threader.magicalitems.adaptor.JSONTemplateAdaptors;
 import net.threader.magicalitems.template.ActionTemplate;
 import net.threader.magicalitems.util.NBTUtils;
 import net.threader.magicalitems.util.Tuple;
