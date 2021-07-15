@@ -1,5 +1,6 @@
 package net.threader.magicalitems;
 
+import net.threader.magicalitems.command.MagicalItemCommand;
 import net.threader.magicalitems.listener.EntityHitByEntityListener;
 import net.threader.magicalitems.listener.EntityShootBowListener;
 import net.threader.magicalitems.listener.magical.MagicalListener;
@@ -21,6 +22,8 @@ public class MagicalItems extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new EntityHitByEntityListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
         Bukkit.getPluginManager().registerEvents(new MagicalListener(), this);
+
+        getCommand("magicalitem").setExecutor(new MagicalItemCommand());
 
         MAGICAL_REGISTRY = new Registry<>();
         this.getConfig().getStringList("items").forEach(x -> {
