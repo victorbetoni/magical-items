@@ -8,6 +8,9 @@ import org.bukkit.potion.PotionEffect;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
+
 public class JSONTemplateAdaptors {
     public static final Registry<TemplateAdaptor<?>> REGISTRY = new Registry<>();
 
@@ -32,5 +35,11 @@ public class JSONTemplateAdaptors {
             return JSONArray.class;
         }
     });
+
+    public static Optional<ActionTemplate<?>> findAndApply(String id, Object param) {
+        AtomicReference<Optional<ActionTemplate<?>>> template = new AtomicReference<>(Optional.empty());
+        REGISTRY.find(id).ifPresent(x -> template.set(Optional.of(x.forceAdapt(param))));
+        return template.get();
+    }
 
 }
