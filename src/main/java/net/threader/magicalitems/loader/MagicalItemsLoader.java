@@ -56,7 +56,7 @@ public class MagicalItemsLoader {
         NBTUtils.injectIdentifier(stack, id);
 
         ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(ChatColor.stripColor(ChatColor.translateAlternateColorCodes('&',(String) object.get("name"))));
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',(String) object.get("name")));
         JSONArray loreArray = (JSONArray) object.get("lore");
         List<String> lore = new ArrayList<>();
         loreArray.forEach(x -> lore.add(ChatColor.translateAlternateColorCodes('&', (String) x)));
