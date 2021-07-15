@@ -21,6 +21,6 @@ public class JSONCasters {
     public static Function<JSONObject, Tuple<Enchantment, Integer>> JSON_TO_ENCHANTMENT = (json) -> {
         Long amplifier = (Long) json.get("amplifier");
         String id = (String) json.get("id");
-        return new Tuple<>(Enchantment.getByKey(new NamespacedKey(MagicalItems.instance(), id)), amplifier.intValue());
+        return new Tuple<>(Enchantment.getByKey(NamespacedKey.minecraft(id)), amplifier.intValue());
     };
 }
