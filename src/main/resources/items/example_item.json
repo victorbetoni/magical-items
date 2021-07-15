@@ -1,6 +1,6 @@
 {
   "name": "&2Poison Axe",
-  "material_id": "diamond_axe",
+  "material": "diamond_axe",
   "lore": [
     "&7Esse machado foi forjada no caldeirão de um feiticeiro",
     "&7especializado em venenos. Poderosa e mortal, a toxina",
