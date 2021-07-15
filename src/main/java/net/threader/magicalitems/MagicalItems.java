@@ -1,7 +1,11 @@
 package net.threader.magicalitems;
 
+import net.threader.magicalitems.listener.EntityHitByEntityListener;
+import net.threader.magicalitems.listener.EntityShootBowListener;
+import net.threader.magicalitems.listener.magical.MagicalListener;
 import net.threader.magicalitems.loader.MagicalItemsLoader;
 import net.threader.magicalitems.registry.Registry;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.IOException;
@@ -13,6 +17,11 @@ public class MagicalItems extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        Bukkit.getPluginManager().registerEvents(new EntityHitByEntityListener(), this);
+        Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
+        Bukkit.getPluginManager().registerEvents(new MagicalListener(), this);
+
         MAGICAL_REGISTRY = new Registry<>();
         this.getConfig().getStringList("items").forEach(x -> {
             try {
