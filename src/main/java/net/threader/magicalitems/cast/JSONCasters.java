@@ -13,14 +13,14 @@ import java.util.function.Function;
 
 public class JSONCasters {
     public static Function<JSONObject, PotionEffect> JSON_TO_POTION_EFFECT = (json) -> {
-        int amplifier = (int) json.get("amplifier");
+        Long amplifier = (Long) json.get("amplifier");
         String id = (String) json.get("id");
-        int duration = (int) json.get("duration");
-        return new PotionEffect(Objects.requireNonNull(PotionEffectType.getByName(id)), duration, amplifier);
+        Long duration = (Long) json.get("duration");
+        return new PotionEffect(Objects.requireNonNull(PotionEffectType.getByName(id)), duration.intValue(), amplifier.intValue());
     };
     public static Function<JSONObject, Tuple<Enchantment, Integer>> JSON_TO_ENCHANTMENT = (json) -> {
-        int amplifier = (int) json.get("amplifier");
+        Long amplifier = (Long) json.get("amplifier");
         String id = (String) json.get("id");
-        return new Tuple<>(Enchantment.getByKey(new NamespacedKey(MagicalItems.instance(), id)), amplifier);
+        return new Tuple<>(Enchantment.getByKey(new NamespacedKey(MagicalItems.instance(), id)), amplifier.intValue());
     };
 }
