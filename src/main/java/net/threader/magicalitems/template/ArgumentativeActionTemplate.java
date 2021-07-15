@@ -1,6 +1,7 @@
 package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.action.Action;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -12,7 +13,7 @@ public class ArgumentativeActionTemplate<T> extends ActionTemplate<T> {
     }
 
     @Override
-    public void apply(Player holder, ItemStack stack, Object param) {
+    public void apply(LivingEntity holder, ItemStack stack, Object param) {
         action.trigger(holder, stack, param, args);
     }
 
