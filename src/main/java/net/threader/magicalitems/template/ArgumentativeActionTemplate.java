@@ -10,6 +10,7 @@ public class ArgumentativeActionTemplate<T> extends ActionTemplate<T> {
 
     public ArgumentativeActionTemplate(String id, Class<T> targetClass, Action action, Object[] args, ActionTemplateTargetSpec spec) {
         super(id, targetClass, action, spec);
+        this.args = args;
     }
 
     @Override
