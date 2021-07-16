@@ -26,10 +26,13 @@ public class EntityHitByEntityListener implements Listener {
 
     @EventHandler
     public void handleCommonHit(EntityDamageByEntityEvent event) {
+        System.out.println(this.getClass().toString() + " 1");
         if(event.getDamager() instanceof LivingEntity && event.getEntity() instanceof LivingEntity) {
+            System.out.println(this.getClass().toString() + " 2");
             LivingEntity damager = (LivingEntity) event.getDamager();
             if(damager.getEquipment().getItemInMainHand().getType() != Material.AIR
                     && NBTUtils.isMagical(damager.getEquipment().getItemInMainHand())) {
+                System.out.println(this.getClass().toString() + " 3");
                 LivingEntityHitByMagicalItemEvent magicalEvent =
                         new LivingEntityHitByMagicalItemEvent(damager, (LivingEntity) event.getEntity(), damager.getEquipment().getItemInMainHand());
                 Bukkit.getPluginManager().callEvent(magicalEvent);

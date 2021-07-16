@@ -16,9 +16,13 @@ public class MagicalListener implements Listener {
     public void handleMagicalEvent(MagicalItemEvent event) {
         String id = NBTUtils.extractIdentifier(event.getItem());
         MagicalItem instance = MagicalItems.MAGICAL_REGISTRY.find(id).get();
+        System.out.println("Clazz: " + event.getClass().toString());
         instance.getActions().forEach(action -> {
+            System.out.println("Encontrou uma ação");
             if(action.getReflectionSpecs().getTargetEventClass().equals(event.getClass())) {
+                System.out.println(this.getClass().toString() + " 1");
                 try {
+                    System.out.println("Passou 2");
                     Class<?> eventClass = event.getClass();
                     Method method = eventClass.getMethod(action.getReflectionSpecs().getMethod());
                     Object param = method.invoke(event, null);

@@ -1,10 +1,10 @@
 {
   "name": "&2Poison Axe",
   "material": "diamond_axe",
-  "lore": [
+  "lore": [" ",
     "&7Esse machado foi forjada no caldeirão de um feiticeiro",
     "&7especializado em venenos. Poderosa e mortal, a toxina",
-    "&7causará nauseas e fraqueza no inimigo."
+    "&7causará nauseas e fraqueza no inimigo."," "
   ],
   "enchantments": [
     {
@@ -18,9 +18,9 @@
   ],
   "onHit": {
     "templates": {
-      "applyEffect": [
+      "apply_effects": [
         {
-          "id": "nausea",
+          "id": "poison",
           "amplifier": 2,
           "duration": 40
         },

@@ -6,7 +6,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffectType;
 
+import java.util.Map;
 import java.util.Optional;
 
 public class MagicalItemCommand implements CommandExecutor {
@@ -40,6 +42,7 @@ public class MagicalItemCommand implements CommandExecutor {
 
             Optional<MagicalItem> item = MagicalItems.MAGICAL_REGISTRY.find(id);
             if(item.isPresent()) {
+                System.out.println("Tamanho das ações: " + item.get().getActions().size());
                 int firstEmpty = player.getInventory().firstEmpty();
                 if(firstEmpty != -1) {
                     player.getInventory().setItem(firstEmpty, item.get().getItemStack().clone());

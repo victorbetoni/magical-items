@@ -8,8 +8,11 @@ import net.threader.magicalitems.loader.MagicalItemsLoader;
 import net.threader.magicalitems.registry.Registry;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffectType;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.Map;
 
 public class MagicalItems extends JavaPlugin {
     private static MagicalItems instance;
@@ -18,6 +21,19 @@ public class MagicalItems extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        Map<String, ?> bro = null;
+        try {
+            Field field = PotionEffectType.class.getDeclaredField("byName");
+            field.setAccessible(true);
+            bro = (Map<String, ?>) field.get(null);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        bro.keySet().forEach(System.out::println);
+
         this.saveDefaultConfig();
         Bukkit.getPluginManager().registerEvents(new EntityHitByEntityListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);

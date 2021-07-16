@@ -21,6 +21,6 @@ public class NBTUtils {
         net.minecraft.server.v1_16_R3.ItemStack craftStack = CraftItemStack.asNMSCopy(stack);
         NBTTagCompound compound = craftStack.hasTag() ? craftStack.getTag() : new NBTTagCompound();
         compound.setString("magical_item_id", id);
-        craftStack.save(compound);
+        craftStack.setTag(compound);
     }
 }
