@@ -2,6 +2,7 @@ package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.registry.Registry;
 import net.threader.magicalitems.util.Tuple;
+import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 
@@ -20,6 +21,16 @@ public class InteractTemplates {
                             if (Math.random() <= tuple.getSecond()) {
                                 ((LivingEntity) e).addPotionEffect(tuple.getFirst());
                             }
+                        }
+                    }, args, spec));
+
+    public static final BiFunction<ActionTemplateTargetSpec, Object[], ArgumentativeActionTemplate<Location>> SUMMON_THUNDER =
+            REGISTRY.register("summon_thunder", (spec, args) ->
+                    new ArgumentativeActionTemplate<>("apply_effects", Location.class, (p, i, e, a) -> {
+                        double chance = (double) a[0];
+                        if(Math.random() <= chance) {
+                            Location loc = (Location) e;
+                            loc.getWorld().strikeLightning(loc);
                         }
                     }, args, spec));
 }

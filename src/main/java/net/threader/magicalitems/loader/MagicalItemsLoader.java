@@ -73,10 +73,13 @@ public class MagicalItemsLoader {
                     });
         }
 
-        if(object.containsKey("living")) {
-            if(object.containsKey("hit")) {
-                JSONObject templates = (JSONObject) ((JSONObject) object.get("onHit")).get("templates");
-                templates.keySet().forEach(x -> JSONTemplateAdaptors.findAndApply((String) x, templates.get(x), "living.hit").ifPresent(actions::add));
+        if(object.containsKey("templates")) {
+            if(object.containsKey("living")) {
+                JSONObject living = (JSONObject) object.get("living");
+                if(object.containsKey("hit")) {
+                    JSONObject hit = (JSONObject) living.get("hit");
+                    hit.keySet().forEach(x -> JSONTemplateAdaptors.findAndApply((String) x, hit.get(x), "living.hit").ifPresent(actions::add));
+                }
             }
         }
 

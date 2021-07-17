@@ -36,7 +36,7 @@ public class JSONTemplateAdaptors {
             for(int i = 0; i < param.size(); i++) {
                 JSONObject obj = (JSONObject) param.get(i);
                 effects[i] = JSONCasters.JSON_TO_POTION_EFFECT.apply(obj);
-                double chance = ((Number) obj.get("")).doubleValue();
+                double chance = ((Number) obj.get("chance")).doubleValue();
                 effects[i] = new Tuple<>(JSONCasters.JSON_TO_POTION_EFFECT.apply(obj), chance);
             }
 
@@ -50,6 +50,30 @@ public class JSONTemplateAdaptors {
         @Override
         public Class<JSONArray> getTargetClass() {
             return JSONArray.class;
+        }
+    });
+
+    public static TemplateAdaptor<JSONObject> SUMMON_THUNDER = REGISTRY.register("summon_thunder", new TemplateAdaptor<JSONObject>() {
+        @Override
+        public String getTargetTemplate() {
+            return "summon_thunder";
+        }
+
+        @Override
+        public ActionTemplate<?> adapt(String path, JSONObject param) {
+            Object[] args = new Object[1];
+            args[0] = ((Number) param.get("chance")).doubleValue();
+
+            if(!JSON_PATH_ADAPTOR.find(path).isPresent()) {
+                return null;
+            }
+
+            return InteractTemplates.REGISTRY.find(getTargetTemplate()).get().apply(JSON_PATH_ADAPTOR.find(path).get(), args);
+        }
+
+        @Override
+        public Class<JSONObject> getTargetClass() {
+            return JSONObject.class;
         }
     });
 
