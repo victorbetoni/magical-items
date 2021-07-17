@@ -4,6 +4,7 @@ import net.threader.magicalitems.template.BasicTemplates;
 import net.threader.magicalitems.cast.JSONCasters;
 import net.threader.magicalitems.registry.Registry;
 import net.threader.magicalitems.template.ActionTemplate;
+import net.threader.magicalitems.util.Tuple;
 import org.bukkit.potion.PotionEffect;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,10 +23,12 @@ public class JSONTemplateAdaptors {
 
         @Override
         public ActionTemplate<?> adapt(JSONArray param) {
-            PotionEffect[] effects = new PotionEffect[param.size()];
+            Object[] effects = new Object[param.size()];
             for(int i = 0; i < param.size(); i++) {
                 JSONObject obj = (JSONObject) param.get(i);
                 effects[i] = JSONCasters.JSON_TO_POTION_EFFECT.apply(obj);
+                double chance = ((Number) obj.get("")).doubleValue();
+                effects[i] = new Tuple<>(JSONCasters.JSON_TO_POTION_EFFECT.apply(obj), chance);
             }
             return BasicTemplates.REGISTRY.find(getTargetTemplate()).get().apply(effects);
         }

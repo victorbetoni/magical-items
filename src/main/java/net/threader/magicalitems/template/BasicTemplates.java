@@ -1,6 +1,7 @@
 package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.registry.Registry;
+import net.threader.magicalitems.util.Tuple;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 
@@ -13,9 +14,11 @@ public class BasicTemplates {
     public static final Function<Object[], ArgumentativeActionTemplate<LivingEntity>> APPLY_EFFECTS = REGISTRY.register(
             "apply_effects", args ->
                     new ArgumentativeActionTemplate<>("apply_effects", LivingEntity.class, (p, i, e, a) -> {
-                        System.out.println("Entrou na ação");
                         for (Object obj : a) {
-                            ((LivingEntity) e).addPotionEffect((PotionEffect) obj);
+                            Tuple<PotionEffect, Double> tuple = (Tuple<PotionEffect, Double>) obj;
+                            if(Math.random() <= tuple.getSecond()) {
+                                ((LivingEntity) e).addPotionEffect(tuple.getFirst());
+                            }
                         }
             }, args, ActionTemplateTargetSpec.LIVING_HIT_TARGET));
 }
