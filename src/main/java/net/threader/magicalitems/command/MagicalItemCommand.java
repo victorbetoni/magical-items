@@ -42,7 +42,6 @@ public class MagicalItemCommand implements CommandExecutor {
 
             Optional<MagicalItem> item = MagicalItems.MAGICAL_REGISTRY.find(id);
             if(item.isPresent()) {
-                System.out.println("Tamanho das ações: " + item.get().getActions().size());
                 int firstEmpty = player.getInventory().firstEmpty();
                 if(firstEmpty != -1) {
                     player.getInventory().setItem(firstEmpty, item.get().getItemStack().clone());

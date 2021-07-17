@@ -16,22 +16,23 @@
       "amplifier": 2
     }
   ],
-  "onHit": {
-    "templates": {
-      "apply_effects": [
-        {
-          "id": "poison",
-          "amplifier": 2,
-          "duration": 40,
-          "chance": 0.25
-        },
-        {
-          "id": "weakness",
-          "amplifier": 1,
-          "duration": 20,
-          "chance": 0.1
-        }
-      ]
-    }
+  "living": {
+    "interact": {
+      "hit": {
+        "apply_effects": [
+          {
+            "id": "poison",
+            "amplifier": 2,
+            "duration": 40,
+            "chance": 0.25
+          },
+          {
+            "id": "weakness",
+            "amplifier": 1,
+            "duration": 20,
+            "chance": 0.1
+          }
+        ]
+      }
   }
 }

@@ -5,20 +5,21 @@ import net.threader.magicalitems.util.Tuple;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class BasicTemplates {
+public class InteractTemplates {
 
-    public static final Registry<Function<Object[], ArgumentativeActionTemplate<LivingEntity>>> REGISTRY = new Registry<>();
+    public static final Registry<BiFunction<ActionTemplateTargetSpec, Object[], ? extends ActionTemplate<?>>> REGISTRY = new Registry<>();
 
-    public static final Function<Object[], ArgumentativeActionTemplate<LivingEntity>> APPLY_EFFECTS = REGISTRY.register(
-            "apply_effects", args ->
+    public static final BiFunction<ActionTemplateTargetSpec, Object[], ArgumentativeActionTemplate<LivingEntity>> APPLY_EFFECTS =
+            REGISTRY.register("apply_effects", (spec, args) ->
                     new ArgumentativeActionTemplate<>("apply_effects", LivingEntity.class, (p, i, e, a) -> {
                         for (Object obj : a) {
                             Tuple<PotionEffect, Double> tuple = (Tuple<PotionEffect, Double>) obj;
-                            if(Math.random() <= tuple.getSecond()) {
+                            if (Math.random() <= tuple.getSecond()) {
                                 ((LivingEntity) e).addPotionEffect(tuple.getFirst());
                             }
                         }
-            }, args, ActionTemplateTargetSpec.LIVING_HIT_TARGET));
+                    }, args, spec));
 }

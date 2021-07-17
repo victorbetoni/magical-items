@@ -22,18 +22,6 @@ public class MagicalItems extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
-        Map<String, ?> bro = null;
-        try {
-            Field field = PotionEffectType.class.getDeclaredField("byName");
-            field.setAccessible(true);
-            bro = (Map<String, ?>) field.get(null);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-        bro.keySet().forEach(System.out::println);
-
         this.saveDefaultConfig();
         Bukkit.getPluginManager().registerEvents(new EntityHitByEntityListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
