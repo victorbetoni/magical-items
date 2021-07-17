@@ -16,11 +16,12 @@ public class JSONTemplateAdaptors {
 
     static {
         Registry<ActionTemplateTargetSpec> dummy = new Registry<>();
-        dummy.register("living.interact.hit", ActionTemplateTargetSpec.LIVING_HIT_TARGET);
+        dummy.register("living.hit", ActionTemplateTargetSpec.LIVING_HIT_TARGET);
         JSON_PATH_ADAPTOR = dummy;
     }
 
     public static Registry<ActionTemplateTargetSpec> JSON_PATH_ADAPTOR;
+
     public static final Registry<TemplateAdaptor<?>> REGISTRY = new Registry<>();
 
     public static TemplateAdaptor<JSONArray> APPLY_EFFECTS = REGISTRY.register("apply_effects", new TemplateAdaptor<JSONArray>() {
