@@ -1,10 +1,10 @@
 package net.threader.magicalitems.util;
 
-public class Tuple<T,U> {
+public class Pair<T,U> {
     private T first;
     private U second;
 
-    public Tuple(T first, U second) {
+    public Pair(T first, U second) {
         this.first = first;
         this.second = second;
     }

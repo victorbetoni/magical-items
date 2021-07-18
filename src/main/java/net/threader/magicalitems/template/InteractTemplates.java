@@ -1,13 +1,12 @@
 package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.registry.Registry;
-import net.threader.magicalitems.util.Tuple;
+import net.threader.magicalitems.util.Pair;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public class InteractTemplates {
 
@@ -17,9 +16,9 @@ public class InteractTemplates {
             REGISTRY.register("apply_effects", (spec, args) ->
                     new ArgumentativeActionTemplate<>("apply_effects", LivingEntity.class, (p, i, e, a) -> {
                         for (Object obj : a) {
-                            Tuple<PotionEffect, Double> tuple = (Tuple<PotionEffect, Double>) obj;
-                            if (Math.random() <= tuple.getSecond()) {
-                                ((LivingEntity) e).addPotionEffect(tuple.getFirst());
+                            Pair<PotionEffect, Double> pair = (Pair<PotionEffect, Double>) obj;
+                            if (Math.random() <= pair.getSecond()) {
+                                ((LivingEntity) e).addPotionEffect(pair.getFirst());
                             }
                         }
                     }, args, spec));

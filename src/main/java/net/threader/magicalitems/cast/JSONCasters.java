@@ -1,7 +1,6 @@
 package net.threader.magicalitems.cast;
 
-import net.threader.magicalitems.MagicalItems;
-import net.threader.magicalitems.util.Tuple;
+import net.threader.magicalitems.util.Pair;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.potion.PotionEffect;
@@ -18,9 +17,10 @@ public class JSONCasters {
         Long duration = (Long) json.get("duration");
         return new PotionEffect(Objects.requireNonNull(PotionEffectType.getByName(id)), duration.intValue(), amplifier.intValue());
     };
-    public static Function<JSONObject, Tuple<Enchantment, Integer>> JSON_TO_ENCHANTMENT = (json) -> {
+
+    public static Function<JSONObject, Pair<Enchantment, Integer>> JSON_TO_ENCHANTMENT = (json) -> {
         Long amplifier = (Long) json.get("amplifier");
         String id = (String) json.get("id");
-        return new Tuple<>(Enchantment.getByKey(NamespacedKey.minecraft(id)), amplifier.intValue());
+        return new Pair<>(Enchantment.getByKey(NamespacedKey.minecraft(id)), amplifier.intValue());
     };
 }

@@ -5,7 +5,7 @@ import net.threader.magicalitems.template.InteractTemplates;
 import net.threader.magicalitems.cast.JSONCasters;
 import net.threader.magicalitems.registry.Registry;
 import net.threader.magicalitems.template.ActionTemplate;
-import net.threader.magicalitems.util.Tuple;
+import net.threader.magicalitems.util.Pair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -37,7 +37,7 @@ public class JSONTemplateAdaptors {
                 JSONObject obj = (JSONObject) param.get(i);
                 effects[i] = JSONCasters.JSON_TO_POTION_EFFECT.apply(obj);
                 double chance = ((Number) obj.get("chance")).doubleValue();
-                effects[i] = new Tuple<>(JSONCasters.JSON_TO_POTION_EFFECT.apply(obj), chance);
+                effects[i] = new Pair<>(JSONCasters.JSON_TO_POTION_EFFECT.apply(obj), chance);
             }
             return InteractTemplates.REGISTRY.find(getTargetTemplate()).get().apply(path, effects);
         }

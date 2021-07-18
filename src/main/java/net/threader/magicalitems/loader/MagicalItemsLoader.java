@@ -7,7 +7,7 @@ import net.threader.magicalitems.adaptor.JSONTemplateAdaptors;
 import net.threader.magicalitems.template.ActionTemplate;
 import net.threader.magicalitems.template.ActionTemplateTargetSpec;
 import net.threader.magicalitems.util.NBTUtils;
-import net.threader.magicalitems.util.Tuple;
+import net.threader.magicalitems.util.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -80,8 +80,8 @@ public class MagicalItemsLoader {
         if(object.containsKey("enchantments")) {
             ((JSONArray) object.get("enchantments"))
                     .forEach(x -> {
-                        Tuple<Enchantment, Integer> tuple = JSONCasters.JSON_TO_ENCHANTMENT.apply((JSONObject) x);
-                        stack.addUnsafeEnchantment(tuple.getFirst(), tuple.getSecond());
+                        Pair<Enchantment, Integer> pair = JSONCasters.JSON_TO_ENCHANTMENT.apply((JSONObject) x);
+                        stack.addUnsafeEnchantment(pair.getFirst(), pair.getSecond());
                     });
         }
 
