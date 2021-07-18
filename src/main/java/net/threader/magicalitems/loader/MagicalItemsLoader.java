@@ -5,6 +5,7 @@ import net.threader.magicalitems.MagicalItems;
 import net.threader.magicalitems.cast.JSONCasters;
 import net.threader.magicalitems.adaptor.JSONTemplateAdaptors;
 import net.threader.magicalitems.template.ActionTemplate;
+import net.threader.magicalitems.template.ActionTemplateTargetSpec;
 import net.threader.magicalitems.util.NBTUtils;
 import net.threader.magicalitems.util.Tuple;
 import org.bukkit.ChatColor;
@@ -24,14 +25,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class MagicalItemsLoader {
 
+    static {
+        Map<String, ActionTemplateTargetSpec> dummy = new HashMap<>();
+        dummy.put("living.hit", ActionTemplateTargetSpec.LIVING_HIT_TARGET);
+        dummy.put("block.interact", ActionTemplateTargetSpec.BLOCK_INTERACT_TARGET);
+        PATH_TO_TARGET_MAPPING = dummy;
+    }
+
+    private static final Map<String, ActionTemplateTargetSpec> PATH_TO_TARGET_MAPPING;
     private static final File ITEMS_DIR = new File(MagicalItems.instance().getDataFolder(), "items");
 
     @SuppressWarnings("all")
@@ -74,13 +86,19 @@ public class MagicalItemsLoader {
         }
 
         if(object.containsKey("templates")) {
-            if(object.containsKey("living")) {
-                JSONObject living = (JSONObject) object.get("living");
-                if(object.containsKey("hit")) {
-                    JSONObject hit = (JSONObject) living.get("hit");
-                    hit.keySet().forEach(x -> JSONTemplateAdaptors.findAndApply((String) x, hit.get(x), "living.hit").ifPresent(actions::add));
-                }
-            }
+            AtomicReference<Object> currentObject = new AtomicReference<>(object.get("templates"));
+            PATH_TO_TARGET_MAPPING.forEach((pathStr, spec) -> {
+                String[] path = pathStr.split(".");
+                for(int i = 0; i<path.length; i++) {
+                    if(i == path.length-1) {
+                        JSONObject obj = (JSONObject) currentObject.get();
+                        obj.keySet().forEach(x -> JSONTemplateAdaptors.findAndApply((String) x, obj.get(x), spec).ifPresent(actions::add));
+                        continue;
+                    }
+                    JSONObject obj = (JSONObject) currentObject.get();
+                    currentObject.set(obj.get(path[i]));
+                 }
+            });
         }
 
         return Optional.of(new MagicalItem(actions, stack));

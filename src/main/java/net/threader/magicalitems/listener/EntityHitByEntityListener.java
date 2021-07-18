@@ -1,6 +1,6 @@
 package net.threader.magicalitems.listener;
 
-import net.threader.magicalitems.event.LivingEntityHitByMagicalItemEvent;
+import net.threader.magicalitems.event.MagicalEntityHitEvent;
 import net.threader.magicalitems.util.NBTUtils;
 import net.threader.magicalitems.watcher.ArrowEntityWatcher;
 import org.bukkit.Bukkit;
@@ -17,7 +17,7 @@ public class EntityHitByEntityListener implements Listener {
         if(event.getDamager() instanceof Arrow) {
             int entityId = event.getDamager().getEntityId();
             if(ArrowEntityWatcher.ARROW_ID_MAP.containsKey(entityId)) {
-                LivingEntityHitByMagicalItemEvent magicalEvent = new LivingEntityHitByMagicalItemEvent((LivingEntity) event.getDamager(), (LivingEntity) event.getEntity(), ArrowEntityWatcher.ARROW_ID_MAP.get(entityId));
+                MagicalEntityHitEvent magicalEvent = new MagicalEntityHitEvent((LivingEntity) event.getDamager(), (LivingEntity) event.getEntity(), ArrowEntityWatcher.ARROW_ID_MAP.get(entityId));
                 ArrowEntityWatcher.ARROW_ID_MAP.remove(entityId);
                 Bukkit.getPluginManager().callEvent(magicalEvent);
             }
@@ -30,8 +30,8 @@ public class EntityHitByEntityListener implements Listener {
             LivingEntity damager = (LivingEntity) event.getDamager();
             if(damager.getEquipment().getItemInMainHand().getType() != Material.AIR
                     && NBTUtils.isMagical(damager.getEquipment().getItemInMainHand())) {
-                LivingEntityHitByMagicalItemEvent magicalEvent =
-                        new LivingEntityHitByMagicalItemEvent(damager, (LivingEntity) event.getEntity(), damager.getEquipment().getItemInMainHand());
+                MagicalEntityHitEvent magicalEvent =
+                        new MagicalEntityHitEvent(damager, (LivingEntity) event.getEntity(), damager.getEquipment().getItemInMainHand());
                 Bukkit.getPluginManager().callEvent(magicalEvent);
             }
         }

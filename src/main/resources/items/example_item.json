@@ -36,6 +36,13 @@
           }
         ]
       }
+    },
+    "block": {
+      "interact": {
+        "summon_thunder": {
+          "chance": 0.15
+        }
+      }
     }
   }
 }

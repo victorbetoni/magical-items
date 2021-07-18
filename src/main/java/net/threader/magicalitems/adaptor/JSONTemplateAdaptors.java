@@ -31,7 +31,7 @@ public class JSONTemplateAdaptors {
         }
 
         @Override
-        public ActionTemplate<?> adapt(String path, JSONArray param) {
+        public ActionTemplate<?> adapt(ActionTemplateTargetSpec path, JSONArray param) {
             Object[] effects = new Object[param.size()];
             for(int i = 0; i < param.size(); i++) {
                 JSONObject obj = (JSONObject) param.get(i);
@@ -39,12 +39,7 @@ public class JSONTemplateAdaptors {
                 double chance = ((Number) obj.get("chance")).doubleValue();
                 effects[i] = new Tuple<>(JSONCasters.JSON_TO_POTION_EFFECT.apply(obj), chance);
             }
-
-            if(!JSON_PATH_ADAPTOR.find(path).isPresent()) {
-                return null;
-            }
-
-            return InteractTemplates.REGISTRY.find(getTargetTemplate()).get().apply(JSON_PATH_ADAPTOR.find(path).get(), effects);
+            return InteractTemplates.REGISTRY.find(getTargetTemplate()).get().apply(path, effects);
         }
 
         @Override
@@ -60,15 +55,11 @@ public class JSONTemplateAdaptors {
         }
 
         @Override
-        public ActionTemplate<?> adapt(String path, JSONObject param) {
+        public ActionTemplate<?> adapt(ActionTemplateTargetSpec path, JSONObject param) {
             Object[] args = new Object[1];
             args[0] = ((Number) param.get("chance")).doubleValue();
 
-            if(!JSON_PATH_ADAPTOR.find(path).isPresent()) {
-                return null;
-            }
-
-            return InteractTemplates.REGISTRY.find(getTargetTemplate()).get().apply(JSON_PATH_ADAPTOR.find(path).get(), args);
+            return InteractTemplates.REGISTRY.find(getTargetTemplate()).get().apply(path, args);
         }
 
         @Override
@@ -77,9 +68,9 @@ public class JSONTemplateAdaptors {
         }
     });
 
-    public static Optional<ActionTemplate<?>> findAndApply(String id, Object param, String path) {
+    public static Optional<ActionTemplate<?>> findAndApply(String id, Object param, ActionTemplateTargetSpec spec) {
         AtomicReference<Optional<ActionTemplate<?>>> template = new AtomicReference<>(Optional.empty());
-        REGISTRY.find(id).ifPresent(x -> template.set(Optional.of(x.forceAdapt(path, param))));
+        REGISTRY.find(id).ifPresent(x -> template.set(Optional.of(x.forceAdapt(spec, param))));
         return template.get();
     }
 
