@@ -1,8 +1,11 @@
 package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.registry.Registry;
+import net.threader.magicalitems.util.ObjectRetrievePath;
 import net.threader.magicalitems.util.Pair;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.potion.PotionEffect;
 
@@ -23,13 +26,19 @@ public class InteractTemplates {
                         }
                     }, args, spec));
 
-    public static final BiFunction<ActionTemplateTargetSpec, Object[], ArgumentativeActionTemplate<Location>> SUMMON_THUNDER =
+    public static final BiFunction<ActionTemplateTargetSpec, Object[], ArgumentativeActionTemplate<Object>> SUMMON_THUNDER =
             REGISTRY.register("summon_thunder", (spec, args) ->
-                    new ArgumentativeActionTemplate<>("apply_effects", Location.class, (p, i, e, a) -> {
+                    new ArgumentativeActionTemplate<>("summon_thunder", Object.class, (p, i, e, a) -> {
+                        ObjectRetrievePath<Location> loc = new ObjectRetrievePath<>(e);
+                        if(e instanceof Entity) {
+                            loc.thenCall(Entity.class, "getLocation");
+                        } else if (e instanceof Block) {
+                            loc.thenCall(Block.class, "getLocation");
+                        }
                         double chance = (double) a[0];
+                        Location location = loc.apply();
                         if(Math.random() <= chance) {
-                            Location loc = (Location) e;
-                            loc.getWorld().strikeLightning(loc);
+                            loc.apply().getWorld().strikeLightning(location);
                         }
                     }, args, spec));
 }

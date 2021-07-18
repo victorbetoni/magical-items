@@ -14,12 +14,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class JSONTemplateAdaptors {
 
-    static {
-        Registry<ActionTemplateTargetSpec> dummy = new Registry<>();
-        dummy.register("living.hit", ActionTemplateTargetSpec.LIVING_HIT_TARGET);
-        JSON_PATH_ADAPTOR = dummy;
-    }
-
     public static Registry<ActionTemplateTargetSpec> JSON_PATH_ADAPTOR;
 
     public static final Registry<TemplateAdaptor<?>> REGISTRY = new Registry<>();

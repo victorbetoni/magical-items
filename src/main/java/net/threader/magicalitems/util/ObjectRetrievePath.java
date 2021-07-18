@@ -1,6 +1,4 @@
-package net.threader.magicalitems.reflection;
-
-import net.threader.magicalitems.util.Pair;
+package net.threader.magicalitems.util;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
