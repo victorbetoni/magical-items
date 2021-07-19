@@ -1,13 +1,14 @@
 package net.threader.magicalitems.template;
 
 import net.threader.magicalitems.event.MagicalBlockInteractEvent;
-import net.threader.magicalitems.event.MagicalEntityHitEvent;
+import net.threader.magicalitems.event.MagicalLivingHitEvent;
 import net.threader.magicalitems.event.MagicalItemEvent;
 
 public class ActionTemplateTargetSpec {
 
-    public static ActionTemplateTargetSpec LIVING_HIT_TARGET = new ActionTemplateTargetSpec(MagicalEntityHitEvent.class, "getTarget");
+    public static ActionTemplateTargetSpec LIVING_HIT_TARGET = new ActionTemplateTargetSpec(MagicalLivingHitEvent.class, "getTarget");
     public static ActionTemplateTargetSpec BLOCK_INTERACT_TARGET = new ActionTemplateTargetSpec(MagicalBlockInteractEvent.class, "getBlock");
+    public static ActionTemplateTargetSpec BLOCK_HIT_TARGET = new ActionTemplateTargetSpec(MagicalBlockInteractEvent.class, "getBlock");
 
     private Class<?> clazz;
     private String method;

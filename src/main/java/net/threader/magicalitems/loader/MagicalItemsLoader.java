@@ -40,6 +40,7 @@ public class MagicalItemsLoader {
         Map<String, ActionTemplateTargetSpec> dummy = new HashMap<>();
         dummy.put("living.hit", ActionTemplateTargetSpec.LIVING_HIT_TARGET);
         dummy.put("block.interact", ActionTemplateTargetSpec.BLOCK_INTERACT_TARGET);
+        dummy.put("block.hit", ActionTemplateTargetSpec.BLOCK_HIT_TARGET);
         PATH_TO_TARGET_MAPPING = dummy;
     }
 

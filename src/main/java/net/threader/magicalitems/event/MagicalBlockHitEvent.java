@@ -4,10 +4,10 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.inventory.ItemStack;
 
-public class MagicalBlockInteractEvent extends MagicalItemEvent {
+public class MagicalBlockHitEvent extends MagicalItemEvent {
     private Block block;
 
-    public MagicalBlockInteractEvent(LivingEntity holder, ItemStack source, Block block) {
+    public MagicalBlockHitEvent(LivingEntity holder, ItemStack source, Block block) {
         super(holder, source);
         this.block = block;
     }

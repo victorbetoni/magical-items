@@ -1,18 +1,15 @@
 package net.threader.magicalitems;
 
 import net.threader.magicalitems.command.MagicalItemCommand;
-import net.threader.magicalitems.listener.EntityHitByEntityListener;
-import net.threader.magicalitems.listener.EntityShootBowListener;
+import net.threader.magicalitems.listener.BlockListeners;
+import net.threader.magicalitems.listener.LivingEntityListeners;
 import net.threader.magicalitems.listener.magical.MagicalListener;
 import net.threader.magicalitems.loader.MagicalItemsLoader;
 import net.threader.magicalitems.registry.Registry;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.potion.PotionEffectType;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.util.Map;
 
 public class MagicalItems extends JavaPlugin {
     private static MagicalItems instance;
@@ -23,8 +20,8 @@ public class MagicalItems extends JavaPlugin {
         instance = this;
 
         this.saveDefaultConfig();
-        Bukkit.getPluginManager().registerEvents(new EntityHitByEntityListener(), this);
-        Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(), this);
+        Bukkit.getPluginManager().registerEvents(new BlockListeners(), this);
+        Bukkit.getPluginManager().registerEvents(new LivingEntityListeners(), this);
         Bukkit.getPluginManager().registerEvents(new MagicalListener(), this);
 
         getCommand("magicalitem").setExecutor(new MagicalItemCommand());

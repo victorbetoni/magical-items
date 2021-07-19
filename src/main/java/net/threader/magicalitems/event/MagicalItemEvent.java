@@ -10,8 +10,9 @@ public class MagicalItemEvent extends Event {
     protected ItemStack source;
     protected LivingEntity holder;
 
-    public MagicalItemEvent(ItemStack source) {
+    public MagicalItemEvent(LivingEntity holder, ItemStack source) {
         this.source = source;
+        this.holder = holder;
     }
 
     public ItemStack getItem() {
