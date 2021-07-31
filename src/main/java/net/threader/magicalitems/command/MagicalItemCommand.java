@@ -32,6 +32,15 @@ public class MagicalItemCommand implements CommandExecutor {
             return true;
         }
 
+        if(strings[0].equalsIgnoreCase("reload")) {
+            if(!commandSender.hasPermission("magicalitems.adm")) {
+                commandSender.sendMessage("§cVocê não tem permissão");
+                return true;
+            }
+            MagicalItems.instance().reload();
+            return false;
+        }
+
         if(strings[0].equalsIgnoreCase("clone")) {
             if(strings.length < 2) {
                 player.sendMessage("§cComando correto: /magicalitem clone <id>");
