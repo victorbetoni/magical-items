@@ -2,7 +2,7 @@ package net.threader.magicalitems.listener;
 
 import net.threader.magicalitems.event.MagicalLivingHitEvent;
 import net.threader.magicalitems.event.MagicalLivingInteractEvent;
-import net.threader.magicalitems.util.NBTUtils;
+import net.threader.magicalitems.util.MagicalItemUtils;
 import net.threader.magicalitems.watcher.ArrowEntityWatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,7 +19,7 @@ public class LivingEntityListeners implements Listener {
 
     @EventHandler
     public void onShot(EntityShootBowEvent event) {
-        if(NBTUtils.isMagical(event.getBow())) {
+        if(MagicalItemUtils.isMagical(event.getBow())) {
             ArrowEntityWatcher.ARROW_ID_MAP.put(event.getProjectile().getEntityId(), event.getBow());
         }
     }
@@ -41,7 +41,7 @@ public class LivingEntityListeners implements Listener {
         if(event.getDamager() instanceof LivingEntity && event.getEntity() instanceof LivingEntity) {
             LivingEntity damager = (LivingEntity) event.getDamager();
             if(damager.getEquipment().getItemInMainHand().getType() != Material.AIR
-                    && NBTUtils.isMagical(damager.getEquipment().getItemInMainHand())) {
+                    && MagicalItemUtils.isMagical(damager.getEquipment().getItemInMainHand())) {
                 MagicalLivingHitEvent magicalEvent =
                         new MagicalLivingHitEvent(damager, (LivingEntity) event.getEntity(), damager.getEquipment().getItemInMainHand());
                 Bukkit.getPluginManager().callEvent(magicalEvent);
@@ -54,7 +54,7 @@ public class LivingEntityListeners implements Listener {
         if(event.getRightClicked() instanceof LivingEntity) {
             LivingEntity target = (LivingEntity) event.getRightClicked();
             ItemStack stack = event.getPlayer().getEquipment().getItemInMainHand();
-            if(stack.getType() != Material.AIR && NBTUtils.isMagical(stack)) {
+            if(stack.getType() != Material.AIR && MagicalItemUtils.isMagical(stack)) {
                 MagicalLivingInteractEvent magicalEvent =
                         new MagicalLivingInteractEvent(event.getPlayer(), target, stack);
                 Bukkit.getPluginManager().callEvent(magicalEvent);

@@ -11,7 +11,7 @@ import org.bukkit.persistence.PersistentDataType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class NBTUtils {
+public class MagicalItemUtils {
 
     private static final NamespacedKey MAGICAL_KEY = new NamespacedKey(MagicalItems.instance(), "magical-item-id");
 

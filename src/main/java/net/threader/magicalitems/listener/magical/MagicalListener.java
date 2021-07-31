@@ -3,7 +3,7 @@ package net.threader.magicalitems.listener.magical;
 import net.threader.magicalitems.MagicalItem;
 import net.threader.magicalitems.MagicalItems;
 import net.threader.magicalitems.event.MagicalItemEvent;
-import net.threader.magicalitems.util.NBTUtils;
+import net.threader.magicalitems.util.MagicalItemUtils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -14,7 +14,7 @@ public class MagicalListener implements Listener {
 
     @EventHandler
     public void handleMagicalEvent(MagicalItemEvent event) {
-        String id = NBTUtils.extractIdentifier(event.getItem());
+        String id = MagicalItemUtils.extractIdentifier(event.getItem());
         MagicalItem instance = MagicalItems.MAGICAL_REGISTRY.find(id).get();
         instance.getActions().forEach(action -> {
             if(action.getReflectionSpecs().getTargetEventClass().equals(event.getClass())) {

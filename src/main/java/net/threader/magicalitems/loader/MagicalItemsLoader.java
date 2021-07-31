@@ -6,7 +6,7 @@ import net.threader.magicalitems.cast.JSONCasters;
 import net.threader.magicalitems.adaptor.JSONTemplateAdaptors;
 import net.threader.magicalitems.template.ActionTemplate;
 import net.threader.magicalitems.template.ActionTemplateTargetSpec;
-import net.threader.magicalitems.util.NBTUtils;
+import net.threader.magicalitems.util.MagicalItemUtils;
 import net.threader.magicalitems.util.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -68,7 +68,7 @@ public class MagicalItemsLoader {
 
         ItemStack stack = new ItemStack((Objects.requireNonNull(Material.matchMaterial((String) object.get("material")))));
 
-        NBTUtils.injectIdentifier(stack, id);
+        MagicalItemUtils.injectIdentifier(stack, id);
 
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',(String) object.get("name")));
