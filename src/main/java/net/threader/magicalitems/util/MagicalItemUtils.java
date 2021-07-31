@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 
 public class MagicalItemUtils {
 
-    private static final NamespacedKey MAGICAL_KEY = new NamespacedKey(MagicalItems.instance(), "magical-item-id");
+    public static final NamespacedKey MAGICAL_KEY = new NamespacedKey(MagicalItems.instance(), "magical-item-id");
 
     public static boolean isMagical(ItemStack stack) {
         ItemMeta meta = stack.getItemMeta();

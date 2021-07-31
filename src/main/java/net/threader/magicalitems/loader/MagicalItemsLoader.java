@@ -73,7 +73,6 @@ public class MagicalItemsLoader {
         ItemMeta meta = stack.getItemMeta();
         meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',(String) object.get("name")));
         JSONArray loreArray = (JSONArray) object.get("lore");
-        meta.getPersistentDataContainer().set(new NamespacedKey(MagicalItems.instance(), "magical_item"), PersistentDataType.STRING, id);
         List<String> lore = new ArrayList<>();
         loreArray.forEach(x -> lore.add(ChatColor.translateAlternateColorCodes('&', (String) x)));
         meta.setLore(lore);
