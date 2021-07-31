@@ -30,4 +30,8 @@ public class MagicalItemUtils {
         meta.getPersistentDataContainer().set(MAGICAL_KEY, PersistentDataType.STRING, id);
         stack.setItemMeta(meta);
     }
+
+    public static boolean isInstance(ItemStack stack, String id) {
+        return isMagical(stack) && extractIdentifier(stack).equalsIgnoreCase(id);
+    }
 }
