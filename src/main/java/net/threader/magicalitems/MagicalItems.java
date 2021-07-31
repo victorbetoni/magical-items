@@ -26,6 +26,15 @@ public class MagicalItems extends JavaPlugin {
 
         getCommand("magicalitem").setExecutor(new MagicalItemCommand());
 
+        this.reload();
+    }
+
+    public static MagicalItems instance() {
+        return instance;
+    }
+
+    public void reload() {
+        this.reloadConfig();
         MAGICAL_REGISTRY = new Registry<>();
         this.getConfig().getStringList("items").forEach(x -> {
             try {
@@ -34,9 +43,5 @@ public class MagicalItems extends JavaPlugin {
                 e.printStackTrace();
             }
         });
-    }
-
-    public static MagicalItems instance() {
-        return instance;
     }
 }
