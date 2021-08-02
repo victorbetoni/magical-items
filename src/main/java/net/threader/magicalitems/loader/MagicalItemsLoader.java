@@ -1,5 +1,6 @@
 package net.threader.magicalitems.loader;
 
+import net.threader.lib.util.Pair;
 import net.threader.magicalitems.MagicalItem;
 import net.threader.magicalitems.MagicalItems;
 import net.threader.magicalitems.cast.JSONCasters;
@@ -7,7 +8,6 @@ import net.threader.magicalitems.adaptor.JSONTemplateAdaptors;
 import net.threader.magicalitems.template.ActionTemplate;
 import net.threader.magicalitems.template.ActionTemplateTargetSpec;
 import net.threader.magicalitems.util.MagicalItemUtils;
-import net.threader.magicalitems.util.Pair;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
