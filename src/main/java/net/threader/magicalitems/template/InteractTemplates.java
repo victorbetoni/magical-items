@@ -2,7 +2,7 @@ package net.threader.magicalitems.template;
 
 import net.threader.lib.util.ObjectRetrievePath;
 import net.threader.lib.util.Pair;
-import net.threader.magicalitems.registry.Registry;
+import net.threader.lib.util.Registry;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;

@@ -1,11 +1,11 @@
 package net.threader.magicalitems;
 
+import net.threader.lib.util.Registry;
 import net.threader.magicalitems.command.MagicalItemCommand;
 import net.threader.magicalitems.listener.BlockListeners;
 import net.threader.magicalitems.listener.LivingEntityListeners;
 import net.threader.magicalitems.listener.magical.MagicalListener;
 import net.threader.magicalitems.loader.MagicalItemsLoader;
-import net.threader.magicalitems.registry.Registry;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 

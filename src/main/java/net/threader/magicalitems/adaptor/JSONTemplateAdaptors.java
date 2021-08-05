@@ -1,11 +1,11 @@
 package net.threader.magicalitems.adaptor;
 
+import net.threader.lib.util.Pair;
+import net.threader.lib.util.Registry;
 import net.threader.magicalitems.template.ActionTemplateTargetSpec;
 import net.threader.magicalitems.template.InteractTemplates;
 import net.threader.magicalitems.cast.JSONCasters;
-import net.threader.magicalitems.registry.Registry;
 import net.threader.magicalitems.template.ActionTemplate;
-import net.threader.magicalitems.util.Pair;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
