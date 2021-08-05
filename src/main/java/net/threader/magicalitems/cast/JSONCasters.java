@@ -1,6 +1,6 @@
 package net.threader.magicalitems.cast;
 
-import net.threader.magicalitems.util.Pair;
+import net.threader.lib.util.Pair;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.potion.PotionEffect;

@@ -1,0 +1,48 @@
+{
+  "name": "&2Poison Axe",
+  "material": "diamond_axe",
+  "lore": [
+    " ",
+    "&7Esse machado foi forjada no caldeirão de um feiticeiro",
+    "&7especializado em venenos. Poderosa e mortal, a toxina",
+    "&7causará nauseas e fraqueza no inimigo.",
+    " "
+  ],
+  "enchantments": [
+    {
+      "id": "fire_aspect",
+      "amplifier": 3
+    },
+    {
+      "id": "knockback",
+      "amplifier": 2
+    }
+  ],
+  "templates": {
+    "living": {
+      "hit": {
+        "apply_effects": [
+          {
+            "id": "poison",
+            "amplifier": 2,
+            "duration": 40,
+            "chance": 0.25
+          },
+          {
+            "id": "weakness",
+            "amplifier": 1,
+            "duration": 20,
+            "chance": 0.1
+          }
+        ]
+      }
+    },
+    "block": {
+      "interact": {
+        "summon_thunder": {
+          "chance": 0.15
+        }
+      }
+    }
+  }
+}
