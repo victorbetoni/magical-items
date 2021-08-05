@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class MagicalItems extends JavaPlugin {
     private static MagicalItems instance;
-    public static Registry<MagicalItem> MAGICAL_REGISTRY;
+    public static Registry<String, MagicalItem> MAGICAL_REGISTRY;
 
     @Override
     public void onEnable() {

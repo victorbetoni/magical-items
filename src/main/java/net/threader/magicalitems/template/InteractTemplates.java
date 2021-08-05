@@ -13,7 +13,7 @@ import java.util.function.BiFunction;
 
 public class InteractTemplates {
 
-    public static final Registry<BiFunction<ActionTemplateTargetSpec, Object[], ? extends ActionTemplate<?>>> REGISTRY = new Registry<>();
+    public static final Registry<String, BiFunction<ActionTemplateTargetSpec, Object[], ? extends ActionTemplate<?>>> REGISTRY = new Registry<>();
 
     public static final BiFunction<ActionTemplateTargetSpec, Object[], ArgumentativeActionTemplate<LivingEntity>> APPLY_EFFECTS =
             REGISTRY.register("apply_effects", (spec, args) ->

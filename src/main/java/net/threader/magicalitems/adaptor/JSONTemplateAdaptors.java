@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class JSONTemplateAdaptors {
-    public static final Registry<TemplateAdaptor<?>> REGISTRY = new Registry<>();
+    public static final Registry<String, TemplateAdaptor<?>> REGISTRY = new Registry<>();
 
     public static TemplateAdaptor<JSONArray> APPLY_EFFECTS = REGISTRY.register("apply_effects", new TemplateAdaptor<JSONArray>() {
         @Override
