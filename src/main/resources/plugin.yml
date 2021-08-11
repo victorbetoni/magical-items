@@ -2,5 +2,7 @@ name: MagicalItems
 main: net.threader.magicalitems.MagicalItems
 version: 1.0
 api-version: 1.16
+depend:
+  - ThreaderLib
 commands:
   magicalitem:

@@ -1,6 +1,8 @@
 package net.threader.magicalitems.loader;
 
+import net.threader.lib.util.ItemStackBuilder;
 import net.threader.lib.util.Pair;
+import net.threader.lib.util.Triple;
 import net.threader.magicalitems.MagicalItem;
 import net.threader.magicalitems.MagicalItems;
 import net.threader.magicalitems.cast.JSONCasters;
@@ -66,25 +68,30 @@ public class MagicalItemsLoader {
             return Optional.empty();
         }
 
-        ItemStack stack = new ItemStack((Objects.requireNonNull(Material.matchMaterial((String) object.get("material")))));
+        ItemStackBuilder builder = new ItemStackBuilder();
+        builder.type(Objects.requireNonNull(Material.matchMaterial((String) object.get("material"))));
+        builder.persistentData(MagicalItemUtils.MAGICAL_KEY, PersistentDataType.STRING, id);
+        builder.title(ChatColor.translateAlternateColorCodes('&',(String) object.get("name")));
 
-        MagicalItemUtils.injectIdentifier(stack, id);
-
-        ItemMeta meta = stack.getItemMeta();
-        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&',(String) object.get("name")));
         JSONArray loreArray = (JSONArray) object.get("lore");
-        List<String> lore = new ArrayList<>();
-        loreArray.forEach(x -> lore.add(ChatColor.translateAlternateColorCodes('&', (String) x)));
-        meta.setLore(lore);
-        stack.setItemMeta(meta);
+
+        loreArray.forEach(x -> builder.lore(ChatColor.translateAlternateColorCodes('&', (String) x)));
 
         Set<ActionTemplate<?>> actions = new HashSet<>();
+
+        if(object.containsKey("persistent_data")) {
+            ((JSONArray) object.get("persistent_data"))
+                    .forEach(x -> {
+                        Triple<NamespacedKey, PersistentDataType<?,?>, Object> triple = JSONCasters.JSON_TO_PERSISTENT_DATA.apply((JSONObject) x);
+                        builder.persistentData(triple.getFirst(), triple.getSecond(), triple.getThird());
+                    });
+        }
 
         if(object.containsKey("enchantments")) {
             ((JSONArray) object.get("enchantments"))
                     .forEach(x -> {
                         Pair<Enchantment, Integer> pair = JSONCasters.JSON_TO_ENCHANTMENT.apply((JSONObject) x);
-                        stack.addUnsafeEnchantment(pair.getFirst(), pair.getSecond());
+                        builder.enchant(pair.getFirst(), pair.getSecond());
                     });
         }
 
@@ -104,6 +111,6 @@ public class MagicalItemsLoader {
             });
         }
 
-        return Optional.of(new MagicalItem(actions, stack));
+        return Optional.of(new MagicalItem(actions, builder.build()));
     }
 }

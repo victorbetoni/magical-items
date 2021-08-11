@@ -8,6 +8,12 @@
     "&7causará nauseas e fraqueza no inimigo.",
     " "
   ],
+  "persistent_data":[
+    {
+      "key": "skill_item",
+      "value": true
+    }
+  ],
   "enchantments": [
     {
       "id": "fire_aspect",
